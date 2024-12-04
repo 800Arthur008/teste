@@ -1,0 +1,61 @@
+create table estacionamento (
+  id integer not null primary key,
+  vaga integer
+);
+
+create table veiculo (
+    id integer,
+    placa char(8),
+    entrada timestamp,
+    saida timestamp,
+    vr_pgto numeric(5,2),
+    id_proprietario integer,
+    id_estacionamento integer,
+    foreign key (id_estacionamento) 
+    references estacionamento(id)
+);
+
+create table proprietario (
+    id integer not null primary key,
+    nome varchar(20),
+    fone varchar(16)
+);
+
+alter table veiculo
+add foreign key (id_proprietario) 
+references proprietario(id);
+
+
+***************************************************************************************************
+
+
+update veiculo
+saida = 2024-06-13 20:00:00
+where placa = 'MBD-1T24';
+
+
+****************************************************************************************************
+
+
+select * from veiculo 
+where placa = 'MBD-1T24'
+order by entrada;
+
+
+****************************************************************************************************
+
+
+select veiculo * from veiculo 
+join proprietario as pr
+on veiculo.id_proprietario = pr.id
+where pr.nome = 'Painho Fabricio Carneiro';
+
+
+****************************************************************************************************
+
+
+select veiculo.placa, estacionamento.vaga, proprietario.nome
+from  
+
+
+
