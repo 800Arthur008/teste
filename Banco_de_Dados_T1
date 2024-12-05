@@ -30,7 +30,7 @@ references proprietario(id);
 
 
 update veiculo
-saida = 2024-06-13 20:00:00
+saida = '2024-06-13 20:00:00'
 where placa = 'MBD-1T24';
 
 
@@ -45,7 +45,7 @@ order by entrada;
 ****************************************************************************************************
 
 
-select veiculo * from veiculo 
+select veiculo.* from veiculo 
 join proprietario as pr
 on veiculo.id_proprietario = pr.id
 where pr.nome = 'Painho Fabricio Carneiro';
@@ -54,8 +54,17 @@ where pr.nome = 'Painho Fabricio Carneiro';
 ****************************************************************************************************
 
 
-select veiculo.placa, estacionamento.vaga, proprietario.nome
-from  
+select v.placa, p.nome
+from  veiculo as v
+join estacionamento as e 
+on v.id_estacionamento = e.id
+join proprietario as p
+on v.id_proprietario = p.id
+where e.vaga = 33 
+  and date(v.entrada) = '2024-06-01';   
+
+  
+
 
 
 

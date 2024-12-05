@@ -1,0 +1,63 @@
+create table medicamento (
+  id integer not null primay key,
+  nome varchar(30)
+);
+
+create table receita (
+  id integer not null primary key,
+  posologia varchar(100),
+  venda timestamp,
+  valor numeric(6,2),
+  id_paciente integer,
+  id_medicamento integer,
+  foreign key (id_medicamento) 
+  references medicamento(id)
+);
+
+create table paciente (
+  id integer not null primary key,
+  nome varchar(20),
+  idade integer
+);
+
+alter table receita
+add foreign key (id_paciente) 
+references paciente(id);
+
+
+*************************************************************************************************
+
+
+update receita
+set valor = 101.50
+where id = 10;
+
+
+*************************************************************************************************
+
+
+select * from receita
+where venda = '2024-06-15'
+order by venda;
+
+
+***************************************************************************************************
+
+
+select r.* from receita as r
+join paciente as p 
+on p.id = r.id_paciente
+where p.nome = 'Painho Fabricio Carneiro';
+
+
+**************************************************************************************************
+
+
+select p.nome, m.nome
+from receita as r
+join paciente as p
+on p.id = r.id_paciente
+join medicamento as m 
+on m.id = r.id_medicamento
+where r.venda = '2024-06-10' and r.valor > 49.99;
+
